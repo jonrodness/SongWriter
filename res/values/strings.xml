@@ -34,6 +34,11 @@
     <string name="stop">Stop</string>
     <string name="recordings_title">Recordings</string>
     <string name="untitled_recording">Untitled</string>
+    <string name="delete_recording">Delete</string>
+    <string name="new_recording">New Recording</string>
+    <string name="add_recording">Add a new recording</string>
+    
+    
     
     
 </resources>

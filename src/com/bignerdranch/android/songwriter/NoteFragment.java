@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 public class NoteFragment extends Fragment {
 
-	public static String EXTRA_NOTE_ID = "com.bignerdranch.android.songwriter.notelistfragment";
+	public static final String EXTRA_NOTE_ID = "com.bignerdranch.android.songwriter.notelistfragment";
 	private static final String TAG = "NoteFragment";
 	private Song mSong;
 	private Note mNote;

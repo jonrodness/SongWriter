@@ -18,13 +18,15 @@ import android.widget.Button;
 
 public class RecordingActivity extends Activity {
 	
+	public static final String EXTRA_RECORDING_ID = "com.bignerdranch.android.songwriter.recordingactivity";
 	private static final String TAG = "RecordingActivity";
 	
 	private MediaRecorder mRecorder;
 	private boolean mStartRecording;
 	private Button mRecordButton;
 
-
+	private Song mSong;
+	
 	private MediaPlayer mPlayer;
 	private boolean mStartPlaying;
 	private Button mPlayButton;
@@ -38,14 +40,20 @@ public class RecordingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recording);
 		
-		mRecording = new Recording();	
-		createFilename();
+		UUID songId = (UUID) getIntent().getSerializableExtra(SongFragment.EXTRA_SONG_ID);
+		mSong = SongLab.get(this).getSongs(songId);
+		UUID recordingId = (UUID) getIntent().getSerializableExtra(EXTRA_RECORDING_ID);
+		mRecording = mSong.getRecording(recordingId);
+		
+		mFileName = createFilename();
+		mRecording.setFileName(mFileName);
 		mStartRecording = true;
 		mStartPlaying = true;
 		
 		setContentView(R.layout.activity_recording);
 		
 		mRecordButton = (Button)findViewById(R.id.record_button);
+		mRecordButton.setText("Start Recording");
 		mRecordButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				onRecord(mStartRecording);
@@ -60,6 +68,7 @@ public class RecordingActivity extends Activity {
 		});
 		
 		mPlayButton = (Button)findViewById(R.id.play_button);
+		mPlayButton.setText("Start Playing");
 		mPlayButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				onPlay(mStartPlaying); 
@@ -73,12 +82,14 @@ public class RecordingActivity extends Activity {
 				}
 			});
 	}
-		
-	private void createFilename() {
+
+	private String createFilename() {
+		String fName;
 		recordingId = mRecording.getId();
 		String hashId = Integer.toString(recordingId.hashCode());
-		mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-		mFileName += "/" + hashId + ".3gp";
+		fName = Environment.getExternalStorageDirectory().getAbsolutePath();
+		fName += "/" + hashId + ".3gp";
+		return fName;
 	}
 
 	private void onRecord(boolean startRecording) {
@@ -102,12 +113,12 @@ public class RecordingActivity extends Activity {
 		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		mRecorder.setOutputFile(mFileName);
 		mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		
 		try {
 			mRecorder.prepare();
 		} catch (IOException e) {
 			Log.e(TAG, "prepare() record failed");
 		}	
+		mRecorder.start();
 	}
 	
 	protected void onPlay(boolean startPlaying) {

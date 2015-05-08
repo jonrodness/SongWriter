@@ -7,10 +7,19 @@ public class Recording {
 	private Date mDate;
 	private String mTitle;
 	private UUID mId;
+	private String mFileName = null;
 	
 	public Recording() {
 		mId = UUID.randomUUID();
 		mDate = new Date();
+	}
+	
+	public String getFileName() {
+		return mFileName;
+	}
+	
+	public void setFileName(String fName) {
+		mFileName = fName;
 	}
 	
 	public UUID getId() {

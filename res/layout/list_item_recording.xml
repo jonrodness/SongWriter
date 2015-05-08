@@ -23,5 +23,16 @@
         android:paddingTop="4dp"
         android:text="Recording date"
         />
+    
+    <TextView
+        android:id="@+id/recording_list_item_play_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recording_list_item_dateTextView"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        />
+        
 
 </RelativeLayout>
