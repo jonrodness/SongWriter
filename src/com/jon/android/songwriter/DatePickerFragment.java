@@ -1,8 +1,10 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import com.jon.android.songwriter.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,13 +17,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
-import android.widget.TimePicker;
-import android.widget.TimePicker.OnTimeChangedListener;
 
-
-public class TimePickerFragment extends DialogFragment {
+public class DatePickerFragment extends DialogFragment {
 	
-	public static final String EXTRA_DATE = "com.bignerdranch.android.songwriter.date";
+	public static final String EXTRA_DATE = "com.jon.android.songwriter.date";
 	private Date mDate; 
 	
 	private void sendResult(int resultCode) {
@@ -33,7 +32,9 @@ public class TimePickerFragment extends DialogFragment {
 		
 		getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
 	}
-		
+	
+	
+	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		mDate = (Date)getArguments().getSerializable(EXTRA_DATE);
@@ -41,36 +42,13 @@ public class TimePickerFragment extends DialogFragment {
 		// Create a Calendar to get the year, month, and day
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(mDate);
-		int hour = calendar.get(Calendar.HOUR);
-		int minute = calendar.get(Calendar.MINUTE);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		
-		//int amPm = calendar.get(Calendar.AM_PM);
+		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
 		
-		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_time, null);
-		
-		TimePicker timePicker = (TimePicker)v.findViewById(R.id.dialog_time_timePicker);
-		timePicker.setCurrentHour(hour);
-		timePicker.setCurrentMinute(minute);
-		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
-
-			@Override
-			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(mDate);
-				int year = calendar.get(Calendar.YEAR);
-				int month = calendar.get(Calendar.MONTH);
-				int day = calendar.get(Calendar.DAY_OF_MONTH);
-				
-				GregorianCalendar gCal = new GregorianCalendar(year, month, day);
-				gCal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-				gCal.set(Calendar.MINUTE, minute);
-				
-				mDate = gCal.getTime();
-				// Update argument to preserve selected value on rotation 
-				getArguments().putSerializable(EXTRA_DATE, mDate);				
-			}
-		});
-		/*
+		DatePicker datePicker = (DatePicker)v.findViewById(R.id.dialog_date_datePicker);
 		datePicker.init(year, month, day, new OnDateChangedListener() {
 			public void onDateChanged(DatePicker view, int year, int month, int day) {
 				// Translate year, month, day into a Date object using a calendar
@@ -79,7 +57,7 @@ public class TimePickerFragment extends DialogFragment {
 				// Update argument to preserve selected value on rotation 
 				getArguments().putSerializable(EXTRA_DATE, mDate);
 			}
-		}); */
+		});
 		
 		return new AlertDialog.Builder(getActivity())
 		.setView(v)
@@ -92,16 +70,15 @@ public class TimePickerFragment extends DialogFragment {
 			}
 		}).create();
 	} 
-		 
+		
 	
-	public static TimePickerFragment newInstance (Date date) {
+	public static DatePickerFragment newInstance (Date date) {
 		Bundle args = new Bundle();
 		args.putSerializable(EXTRA_DATE, date);
 		
-		TimePickerFragment fragment = new TimePickerFragment();
+		DatePickerFragment fragment = new DatePickerFragment();
 		fragment.setArguments(args);
 		
 		return fragment;
 	}
-
 }

@@ -1,25 +1,18 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Recording {
+public class Note {
+	
 	private Date mDate;
+	private String mBody;
 	private String mTitle;
 	private UUID mId;
-	private String mFileName = null;
 	
-	public Recording() {
+	public Note() {
 		mId = UUID.randomUUID();
 		mDate = new Date();
-	}
-	
-	public String getFileName() {
-		return mFileName;
-	}
-	
-	public void setFileName(String fName) {
-		mFileName = fName;
 	}
 	
 	public UUID getId() {
@@ -32,6 +25,14 @@ public class Recording {
 
 	public void setDate(Date date) {
 		mDate = date;
+	}
+
+	public String getBody() {
+		return mBody;
+	}
+
+	public void setBody(String content) {
+		mBody = content;
 	}
 
 	public String getTitle() {

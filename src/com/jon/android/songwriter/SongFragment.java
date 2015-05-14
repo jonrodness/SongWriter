@@ -1,7 +1,9 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.util.Date;
 import java.util.UUID;
+
+import com.jon.android.songwriter.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -33,7 +35,7 @@ import android.widget.TextView;
 public class SongFragment extends Fragment {
 	
 	public static final String 
-	EXTRA_SONG_ID = "com.bignerdranch.android.songwriter.song_id";
+	EXTRA_SONG_ID = "com.jon.android.songwriter.song_id";
 			
 	private static final String TAG = "SongFragment";
 	private Song mSong;

@@ -1,4 +1,4 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import android.support.v4.app.Fragment;
 

@@ -1,6 +1,8 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.util.Date;
+
+import com.jon.android.songwriter.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +19,7 @@ import android.widget.Button;
 
 public class ChooseFragment extends DialogFragment {
 	
-	public static final String EXTRA_DATE = "com.bignerdranch.android.songwriter.date";
+	public static final String EXTRA_DATE = "com.jon.android.songwriter.date";
 	
 	private Button mDateButton;
 	private Button mTimeButton;

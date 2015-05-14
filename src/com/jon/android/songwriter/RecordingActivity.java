@@ -1,10 +1,10 @@
-package com.bignerdranch.android.songwriter;
-
-// majority of code taken from: http://developer.android.com/guide/topics/media/audio-capture.html
+package com.jon.android.songwriter;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
+import com.jon.android.songwriter.R;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -18,7 +18,7 @@ import android.widget.Button;
 
 public class RecordingActivity extends Activity {
 	
-	public static final String EXTRA_RECORDING_ID = "com.bignerdranch.android.songwriter.recordingactivity";
+	public static final String EXTRA_RECORDING_ID = "com.jon.android.songwriter.recordingactivity";
 	private static final String TAG = "RecordingActivity";
 	
 	private MediaRecorder mRecorder;

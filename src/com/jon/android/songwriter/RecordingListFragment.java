@@ -1,9 +1,11 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+
+import com.jon.android.songwriter.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

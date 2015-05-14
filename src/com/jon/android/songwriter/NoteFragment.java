@@ -1,7 +1,9 @@
-package com.bignerdranch.android.songwriter;
+package com.jon.android.songwriter;
 
 import java.util.Date;
 import java.util.UUID;
+
+import com.jon.android.songwriter.R;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -22,7 +24,7 @@ import android.widget.TextView;
 
 public class NoteFragment extends Fragment {
 
-	public static final String EXTRA_NOTE_ID = "com.bignerdranch.android.songwriter.notelistfragment";
+	public static final String EXTRA_NOTE_ID = "com.jon.android.songwriter.notelistfragment";
 	private static final String TAG = "NoteFragment";
 	private Song mSong;
 	private Note mNote;
