@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AbsListView.MultiChoiceModeListener;
@@ -37,7 +39,7 @@ public class RecordingListFragment extends ListFragment {
 	private Song mSong;
 	private EditText mTitleField;
 	private TextView mDateText;
-	private TextView mPlayStatus;
+	private ImageView mPlayStatus;
 	private Button mAddRecordingButton;
 	private ArrayList<Recording> mRecordings;
 	private boolean mStartPlaying;
@@ -56,6 +58,15 @@ public class RecordingListFragment extends ListFragment {
 		mSong = SongLab.get(getActivity()).getSongs(songId);
 		mRecordings = mSong.getRecordings();
 		
+		if (mSong.getTitle() != null) {
+			getActivity().setTitle(mSong.getTitle()
+					+ ": " + getResources().getText(R.string.recordings_title));
+		}
+		else {
+			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
+					+ ": " + getResources().getText(R.string.recordings_title));
+		}
+				
 		RecordingAdapter adapter = new RecordingAdapter(mRecordings);
 		setListAdapter(adapter);
 	}
@@ -70,6 +81,11 @@ public class RecordingListFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()){
+		case android.R.id.home:
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			return true;
 			case R.id.menu_item_new_recording:
 				Recording r = new Recording();
 				r.setDate(new Date());
@@ -88,6 +104,12 @@ public class RecordingListFragment extends ListFragment {
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_recording_list, parent, false);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			}
+		}
 		
 		mAddRecordingButton = (Button)v.findViewById(R.id.add_recording_button);
 		mAddRecordingButton.setOnClickListener(new View.OnClickListener() {
@@ -176,8 +198,9 @@ public class RecordingListFragment extends ListFragment {
 			}
 			TextView dateTextView = (TextView) convertView.findViewById(R.id.recording_list_item_dateTextView);
 			dateTextView.setText(android.text.format.DateFormat.format("MMM dd, yyyy hh:mma", r.getDate()));
-			mPlayStatus = (TextView)convertView.findViewById(R.id.recording_list_item_play_status);
-			mPlayStatus.setText("Play");
+			mPlayStatus = (ImageView)convertView.findViewById(R.id.recording_list_item_play_status);
+			mPlayStatus.setImageResource(R.drawable.ic_media_play);
+			//mPlayStatus.setText("Play");
 
 			return convertView;		
 		}	
@@ -190,10 +213,12 @@ public class RecordingListFragment extends ListFragment {
 		
 		onPlay(mStartPlaying, fName); 
 		if (mStartPlaying) {
-			mPlayStatus.setText("Stop");
+			mPlayStatus.setImageResource(R.drawable.ic_media_stop);
+			//mPlayStatus.setText("Stop");
 		}
 		else {
-			mPlayStatus.setText("Play");
+			mPlayStatus.setImageResource(R.drawable.ic_media_play);
+			//mPlayStatus.setText("Play");
 		}
 		mStartPlaying = !mStartPlaying;
 		

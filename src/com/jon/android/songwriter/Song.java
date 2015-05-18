@@ -1,9 +1,11 @@
 package com.jon.android.songwriter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,11 +18,14 @@ public class Song {
     private static final String JSON_TITLE = "title";
     private static final String JSON_FAVOURITE = "favourite";
     private static final String JSON_DATE = "date";
+    private static final String JSON_NOTES = "notes";
+    private static final String JSON_RECORDINGS = "recordings";
+
 	
 	private UUID mId;
 	private String mTitle;
 	private Date mDate;
-	private boolean mFavourite;
+	private boolean mFavourite = false;
 	private ArrayList<Note> mNotes;
 	private ArrayList<Recording> mRecordings;
 	
@@ -32,18 +37,56 @@ public class Song {
 	}
 	
 	public Song(JSONObject json) throws JSONException {
-        mId = UUID.fromString(json.getString(JSON_ID));
+        JSONArray notes = new JSONArray();
+        JSONArray recordings = new JSONArray();
+		
+		mId = UUID.fromString(json.getString(JSON_ID));
         mTitle = json.getString(JSON_TITLE);
         mFavourite = json.getBoolean(JSON_FAVOURITE);
         mDate = new Date(json.getLong(JSON_DATE));
+        
+        mNotes = new ArrayList<Note>();
+        
+        if (json.has(JSON_NOTES)) {
+        	notes = json.getJSONArray(JSON_NOTES);
+            for (int i = 0; i < notes.length(); i++) {
+            	Note note = new Note (notes.getJSONObject(i));
+            	mNotes.add(note);
+            }
+        }
+        
+        
+        mRecordings = new ArrayList<Recording>();
+        
+        if (json.has(JSON_RECORDINGS)){
+	        recordings = json.getJSONArray(JSON_RECORDINGS);
+	        for (int i = 0; i < recordings.length(); i++) {
+	        	Recording rec = new Recording (recordings.getJSONObject(i));
+	        	mRecordings.add(rec);
+	        }
+        }
     }
 	
 	public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
+        JSONArray notes = new JSONArray();
+        JSONArray recordings = new JSONArray();
+        
         json.put(JSON_ID, mId.toString());
         json.put(JSON_TITLE, mTitle);
         json.put(JSON_FAVOURITE, mFavourite);
         json.put(JSON_DATE, mDate.getTime());
+        
+        for (Note note:mNotes) {
+        	notes.put(note.toJSON());
+            json.put(JSON_NOTES, notes);
+        }
+        
+        for (Recording rec:mRecordings) {
+        	recordings.put(rec.toJSON());
+        	json.put(JSON_RECORDINGS, recordings);
+        }
+        
         return json;
     }
 	
@@ -52,7 +95,9 @@ public class Song {
 	}
 	
 	public void deleteRecording (Recording recording) {
-		mNotes.remove(recording);
+		File targetFile = new File (recording.getFileName());
+		targetFile.delete();
+		mRecordings.remove(recording);
 	}
 	
 	public ArrayList<Recording> getRecordings() {

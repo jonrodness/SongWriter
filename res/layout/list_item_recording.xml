@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recording_list_item_bar"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-    <TextView
-        android:id="@+id/recording_list_item_titleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="Recording title"
-        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical" >
     
-    <TextView
-        android:id="@+id/recording_list_item_dateTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recording_list_item_titleTextView"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="Recording date"
-        />
+	    <TextView
+	        android:id="@+id/recording_list_item_titleTextView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textStyle="bold"
+	        android:paddingLeft="4dp"
+	        android:paddingRight="4dp"
+	        android:text="Recording title"
+	        />
+	    
+	    <TextView
+	        android:id="@+id/recording_list_item_dateTextView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/recording_list_item_titleTextView"
+	        android:paddingLeft="4dp"
+	        android:paddingRight="4dp"
+	        android:paddingTop="4dp"
+	        android:text="Recording date"
+	        />
     
-    <TextView
+    </LinearLayout>
+            
+    <ImageView
         android:id="@+id/recording_list_item_play_status"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recording_list_item_dateTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingTop="4dp"
-        />
-        
+         />
+    
 
 </RelativeLayout>

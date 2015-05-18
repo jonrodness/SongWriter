@@ -23,31 +23,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity android:name="com.jon.android.songwriter.SongPagerActivity"
             android:label="@string/app_name" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SongListActivity" />
         </activity>
+        
         <activity android:name="com.jon.android.songwriter.NoteListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SongPagerActivity" />
         </activity>
+        
         <activity android:name="com.jon.android.songwriter.NotePagerActivity"
             android:label="@string/app_name" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NoteListActivity" />
         </activity>
+        
         <activity android:name="com.jon.android.songwriter.RecordingActivity"
             android:label="@string/app_name" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".RecordingListActivity" />
         </activity>
+        
         <activity android:name="com.jon.android.songwriter.RecordingListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SongPagerActivity" />
         </activity>
+    
     </application>
     
     

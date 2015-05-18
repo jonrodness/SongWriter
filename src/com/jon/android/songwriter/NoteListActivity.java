@@ -10,6 +10,7 @@ public class NoteListActivity extends SingleFragmentActivity {
 	protected Fragment createFragment() {
 		UUID songId = (UUID) getIntent().getSerializableExtra(SongFragment.EXTRA_SONG_ID);
 		NoteListFragment fragment = NoteListFragment.newInstance(songId);
+
 		return fragment;
 	}
 

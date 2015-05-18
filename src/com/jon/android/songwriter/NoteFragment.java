@@ -7,6 +7,7 @@ import com.jon.android.songwriter.R;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
@@ -42,11 +43,6 @@ public class NoteFragment extends Fragment {
 		mSong = SongLab.get(getActivity()).getSongs(songId);
 		UUID noteId = (UUID) getArguments().getSerializable(EXTRA_NOTE_ID);
 		mNote = mSong.getNote(noteId);
-		
-		if (mNote.getTitle() != null) 
-			getActivity().setTitle(mNote.getTitle());
-		else
-			getActivity().setTitle(R.string.untitled_note);
 	}
 	
 	@Override
@@ -58,25 +54,33 @@ public class NoteFragment extends Fragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
+			case android.R.id.home:
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
+				return true;
 			case R.id.menu_item_delete_note:
 				mSong.deleteNote(mNote);
 				Log.d(TAG, "Note deleted");
-				if (NavUtils.getParentActivityName(getActivity()) != null) {
-					Intent i = new Intent(getActivity(), NoteListActivity.class);
-					i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
+				if (NavUtils.getParentActivityName(getActivity()) != null) {				
 					NavUtils.navigateUpFromSameTask(getActivity());
-					return true;
 				}
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
+		
 	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_note, parent, false);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			}
+		}
 		
 		mDate = (TextView) v.findViewById(R.id.note_date);
 		mDate.setText(android.text.format.DateFormat.format("MMM, dd, yyyy hh:mma", mNote.getDate()));
@@ -128,6 +132,12 @@ public class NoteFragment extends Fragment {
 		args.putSerializable(NoteFragment.EXTRA_NOTE_ID, noteId);
 				
 		return fragment;
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		SongLab.get(getActivity()).saveSongs();
 	}
 
 }

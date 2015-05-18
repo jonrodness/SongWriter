@@ -6,8 +6,9 @@
     <string name="title_activity_song">SongActivity</string>
     <string name="song_title_hint">Enter a title for the song.</string>
     <string name="song_title_label">Title: </string>
-    <string name="song_created_label">Created: </string>
-    <string name="songs_title">Songs</string>
+    <string name="song_created_label">Created: &#160;</string>
+    <string name="songs_title">Song List</string>
+    <string name="untitled_song">Untitled</string>
     <string name="date_picker_title">Date of crime</string>
     <string name="date_button">Date</string>
     <string name="time_button">Time</string>
@@ -20,23 +21,25 @@
     <string name="add_song">Add a new song</string>
     <string name="notes">Notes</string>
     <string name="recordings">Recordings</string>
-    <string name="notes_title">Notes</string>
+    <string name="notes_title">Note List</string>
     <string name="add_note">Add a new note</string>
     <string name="delete_note">Delete</string>
     <string name="note_title_label">Title: </string>
     <string name="note_title_hint">Enter a title for the note.</string>
-    <string name="note_created_label">Created on &#160;</string>
+    <string name="note_created_label">Created: &#160;</string>
     <string name="note_body_hint">Write your note here.</string>
     <string name="untitled_note">Untitled</string>
     <string name="new_note">New Note</string>
     <string name="play">Play</string>
     <string name="record">Record</string>
     <string name="stop">Stop</string>
-    <string name="recordings_title">Recordings</string>
+    <string name="recordings_title">Recording List</string>
     <string name="untitled_recording">Untitled</string>
     <string name="delete_recording">Delete</string>
     <string name="new_recording">New Recording</string>
     <string name="add_recording">Add a new recording</string>
+    <string name="recording_title_label">Title: </string>
+    <string name="recording_title_hint">Enter a title for the recording.</string>
     
     
     

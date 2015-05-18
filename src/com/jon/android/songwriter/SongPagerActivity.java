@@ -37,6 +37,12 @@ public class SongPagerActivity extends FragmentActivity {
 			@Override
 			public Fragment getItem(int pos) {
 				Song song = mSongs.get(pos);
+				if(song.getTitle() != null) {
+					setTitle("Song: " + song.getTitle());
+				}
+				else {
+					setTitle("Song: " + getResources().getString(R.string.untitled_song));
+				}
 				return SongFragment.newInstance(song.getId());
 			}
 		});
@@ -50,12 +56,14 @@ public class SongPagerActivity extends FragmentActivity {
 			public void onPageSelected(int pos) {
 				Song song = mSongs.get(pos);
 				if(song.getTitle() != null) {
-					setTitle(song.getTitle());		
+					setTitle("Song: " + song.getTitle());
+				}
+				else {
+					setTitle("Song: " + getResources().getString(R.string.untitled_song));
 				}
 			}
 		});
-		
-		
+				
 		UUID songId = (UUID)getIntent().getSerializableExtra(SongFragment.EXTRA_SONG_ID);
 		for (int i = 0; i < mSongs.size(); i++){
 			if (mSongs.get(i).getId().equals(songId)){

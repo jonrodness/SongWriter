@@ -23,6 +23,7 @@ public class SongLab {
 		
 		try {
 			mSongs = mSerializer.loadSongs();
+            Log.d(TAG, "songs loaded from file");
 		} catch (Exception e) {
 			mSongs = new ArrayList<Song>();
 			Log.e(TAG, "Error loading  songs: ", e);
@@ -51,10 +52,10 @@ public class SongLab {
 	public boolean saveSongs() {
         try {
             mSerializer.saveSongs(mSongs);
-            Log.d(TAG, "crimes saved to file");
+            Log.d(TAG, "songs saved to file");
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "Error saving crimes: ", e);
+            Log.e(TAG, "Error saving songs: ", e);
             return false;
         }
     }

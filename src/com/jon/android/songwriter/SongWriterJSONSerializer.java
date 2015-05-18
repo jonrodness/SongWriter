@@ -19,6 +19,8 @@ import android.util.Log;
 
 public class SongWriterJSONSerializer {
 
+	private static final String TAG = "Serializer";
+	
     private Context mContext;
     private String mFilename;
 
@@ -47,6 +49,7 @@ public class SongWriterJSONSerializer {
             for (int i = 0; i < array.length(); i++) {
                 songs.add(new Song(array.getJSONObject(i)));
             }
+            Log.d(TAG, "Songs loaded");
         } catch (FileNotFoundException e) {
             // Ignore this one; it happens when starting fresh
         } finally {
@@ -71,6 +74,7 @@ public class SongWriterJSONSerializer {
                 .openFileOutput(mFilename, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
             writer.write(array.toString());
+            Log.d(TAG, "Songs saved");
         } finally {
             if (writer != null)
                 writer.close();

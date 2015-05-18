@@ -8,6 +8,7 @@ import java.util.UUID;
 
 
 
+
 import com.jon.android.songwriter.R;
 
 import android.annotation.TargetApi;
@@ -15,6 +16,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,11 +42,10 @@ public class NoteListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
-		getActivity().setTitle(R.string.notes_title);
 		
 		mSongs = SongLab.get(getActivity()).getSongs();
+		
 		UUID songId = (UUID) getArguments().getSerializable(SongFragment.EXTRA_SONG_ID);
-		//UUID songId = (UUID)getActivity().getIntent().getSerializableExtra(SongFragment.EXTRA_SONG_ID);
 		
 		for (int i = 0; i < mSongs.size(); i++){
 			if (mSongs.get(i).getId().equals(songId)){
@@ -52,9 +53,18 @@ public class NoteListFragment extends ListFragment {
 				break;
 			}
 			mSong = null;
+		}		
+		mNotes = mSong.getNotes();
+		
+		if (mSong.getTitle() != null) {
+			getActivity().setTitle(mSong.getTitle()
+					+ ": " + getResources().getText(R.string.notes_title));
+		}
+		else {
+			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
+					+ ": " + getResources().getText(R.string.notes_title));
 		}
 		
-		mNotes = mSong.getNotes();
 		
 		NoteAdapter adapter = new NoteAdapter(mNotes);
 		setListAdapter(adapter);
@@ -70,6 +80,11 @@ public class NoteListFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()){
+			case android.R.id.home:
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
+				return true;
 			case R.id.menu_item_new_note:
 				Note n = new Note();
 				n.setDate(new Date());
@@ -89,6 +104,11 @@ public class NoteListFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_note_list, parent, false);
 	
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		if (NavUtils.getParentActivityName(getActivity()) != null) {
+			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
 	
 	mAddNoteButton = (Button)v.findViewById(R.id.add_note_button);
 	mAddNoteButton.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +191,6 @@ public class NoteListFragment extends ListFragment {
 		super.onResume();
 		((NoteAdapter)getListAdapter()).notifyDataSetChanged();
 	}
-	
 	
 	public static NoteListFragment newInstance(UUID songId) {
 		Bundle args = new Bundle();

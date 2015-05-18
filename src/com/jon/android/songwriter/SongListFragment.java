@@ -32,14 +32,12 @@ public class SongListFragment extends ListFragment {
 	
 	private static final String TAG = "SongListFragment";
 	private ArrayList<Song> mSongs;
-	private boolean mSubtitleVisible;
 	private Button mAddSongButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		mSubtitleVisible = false;
 		setHasOptionsMenu(true);
 		getActivity().setTitle(R.string.songs_title);
 		mSongs = SongLab.get(getActivity()).getSongs();
@@ -51,10 +49,6 @@ public class SongListFragment extends ListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 	    super.onCreateOptionsMenu(menu, inflater);
 	    inflater.inflate(R.menu.fragment_song_list, menu);
-	    MenuItem showSubtitle = menu.findItem(R.id.menu_item_show_subtitle);
-	    if (mSubtitleVisible && showSubtitle != null) {
-	    	showSubtitle.setTitle(R.string.hide_subtitle);
-	    }
 	}
 	
 	@TargetApi(11)
@@ -68,17 +62,6 @@ public class SongListFragment extends ListFragment {
 	            i.putExtra(SongFragment.EXTRA_SONG_ID, s.getId());
 	            startActivityForResult(i, 0);
 	            return true;
-	        case R.id.menu_item_show_subtitle:
-	        	if (getActivity().getActionBar().getSubtitle() == null){
-	        		getActivity().getActionBar().setSubtitle(R.string.subtitle);
-	        		mSubtitleVisible = true;
-	        		item.setTitle(R.string.hide_subtitle);
-	        	} else {
-	        		getActivity().getActionBar().setSubtitle(null);
-	        		mSubtitleVisible = false;
-	        		item.setTitle(R.string.show_subtitle);
-	        	}
-                return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -122,12 +105,6 @@ public class SongListFragment extends ListFragment {
 	            startActivity(i);				
 			}
 		});
-		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-			if (mSubtitleVisible) {
-				getActivity().getActionBar().setSubtitle(R.string.subtitle);
-			}
-		}
 		
 		ListView listView = (ListView)v.findViewById(android.R.id.list);
 		
@@ -207,7 +184,10 @@ public class SongListFragment extends ListFragment {
 			Song s = getItem(position);
 			
 			TextView titleTextView = (TextView)convertView.findViewById(R.id.song_list_item_titleTextView);
-			titleTextView.setText(s.getTitle());
+			if (s.getTitle() != null) {
+				titleTextView.setText(s.getTitle());
+			} else
+				titleTextView.setText(R.string.untitled_song);
 			TextView dateTextView = (TextView)convertView.findViewById(R.id.song_list_item_dateTextView);
 			dateTextView.setText(android.text.format.DateFormat.format("MMM dd, yyyy hh:mma", s.getDate()));
 			
