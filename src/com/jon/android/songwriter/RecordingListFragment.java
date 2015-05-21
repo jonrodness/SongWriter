@@ -37,8 +37,6 @@ public class RecordingListFragment extends ListFragment {
 	
 	private static final String TAG = "RecordingListFragment";
 	private Song mSong;
-	private EditText mTitleField;
-	private TextView mDateText;
 	private ImageView mPlayStatus;
 	private Button mAddRecordingButton;
 	private ArrayList<Recording> mRecordings;
@@ -136,11 +134,8 @@ public class RecordingListFragment extends ListFragment {
 			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 			listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {	
 				
-				public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-					//Required, but not used in this implementation
-				}
+				public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {}
 				
-				// ActionMode.Callback methods
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 					MenuInflater inflater = mode.getMenuInflater();
 					inflater.inflate(R.menu.recording_list_item_context, menu);
@@ -156,7 +151,6 @@ public class RecordingListFragment extends ListFragment {
 					switch (item.getItemId()) {
 						case R.id.menu_item_delete_recording:
 							RecordingAdapter adapter = (RecordingAdapter) getListAdapter();
-							//SongLab songLab = SongLab.get(getActivity());
 							for (int i  = adapter.getCount() - 1; i >= 0; i--) {
 								if (getListView().isItemChecked(i)) {
 									mSong.deleteRecording(adapter.getItem(i));
@@ -169,9 +163,7 @@ public class RecordingListFragment extends ListFragment {
 							return false;
 					}
 				}
-				public void onDestroyActionMode(ActionMode mode) {
-				// Required, but not used in this implementation
-				}
+				public void onDestroyActionMode(ActionMode mode) {}
 			});
 		}
 		return v;
@@ -214,19 +206,11 @@ public class RecordingListFragment extends ListFragment {
 		onPlay(mStartPlaying, fName); 
 		if (mStartPlaying) {
 			mPlayStatus.setImageResource(R.drawable.ic_media_stop);
-			//mPlayStatus.setText("Stop");
 		}
 		else {
 			mPlayStatus.setImageResource(R.drawable.ic_media_play);
-			//mPlayStatus.setText("Play");
 		}
 		mStartPlaying = !mStartPlaying;
-		
-		
-//		Intent i = new Intent(getActivity(), RecordingActivity.class);
-//		i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//		i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-//		startActivity(i);
 	}
 	
 	private void onPlay(boolean startPlaying, String fName) {

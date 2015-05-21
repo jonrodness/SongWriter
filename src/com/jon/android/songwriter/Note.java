@@ -72,8 +72,7 @@ public class Note {
 		json.put(JSON_ID, mId.toString());
 		json.put(JSON_TITLE, mTitle);
 		json.put(JSON_BODY, mBody);
-		json.put(JSON_DATE, mDate.getTime());
-		
+		json.put(JSON_DATE, mDate.getTime());	
 		Log.d(TAG, "Note to JSON successful");
 		
 		return json;

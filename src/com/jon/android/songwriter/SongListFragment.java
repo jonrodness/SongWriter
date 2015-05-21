@@ -116,11 +116,8 @@ public class SongListFragment extends ListFragment {
 			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 			listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {	
 				
-				public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-					//Required, but not used in this implementation
-				}
+				public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {}
 				
-				// ActionMode.Callback methods
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 					MenuInflater inflater = mode.getMenuInflater();
 					inflater.inflate(R.menu.song_list_item_context, menu);
@@ -129,7 +126,6 @@ public class SongListFragment extends ListFragment {
 				
 				public boolean onPrepareActionMode (ActionMode mode, Menu menu) {
 					return false;
-					// Required, but not used in this implementation
 				}
 				
 				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
@@ -150,9 +146,7 @@ public class SongListFragment extends ListFragment {
 					}
 				}
 				
-				public void onDestroyActionMode(ActionMode mode) {
-				// Required, but not used in this implementation
-				}
+				public void onDestroyActionMode(ActionMode mode) {}
 			});
 		}				
 		return v;
@@ -161,8 +155,6 @@ public class SongListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Song s = ((SongAdapter)getListAdapter()).getItem(position);
-		
-		// Start SongPagerActivity with this song
 		Intent i = new Intent(getActivity(), SongPagerActivity.class);
 		i.putExtra(SongFragment.EXTRA_SONG_ID, s.getId());
 		startActivity(i);
@@ -180,7 +172,6 @@ public class SongListFragment extends ListFragment {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_song, null);
 			}
 			
-			// Configure the view for this crime
 			Song s = getItem(position);
 			
 			TextView titleTextView = (TextView)convertView.findViewById(R.id.song_list_item_titleTextView);

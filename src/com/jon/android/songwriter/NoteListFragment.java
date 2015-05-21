@@ -135,9 +135,7 @@ public class NoteListFragment extends ListFragment {
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {	
 			
-			public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-				//Required, but not used in this implementation
-			}
+			public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {}
 			
 			// ActionMode.Callback methods
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -148,14 +146,12 @@ public class NoteListFragment extends ListFragment {
 			
 			public boolean onPrepareActionMode (ActionMode mode, Menu menu) {
 				return false;
-				// Required, but not used in this implementation
 			}
 			
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 					case R.id.menu_item_delete_note:
 						NoteAdapter adapter = (NoteAdapter) getListAdapter();
-						//SongLab songLab = SongLab.get(getActivity());
 						for (int i  = adapter.getCount() - 1; i >= 0; i--) {
 							if (getListView().isItemChecked(i)) {
 								mSong.deleteNote(adapter.getItem(i));
@@ -168,9 +164,7 @@ public class NoteListFragment extends ListFragment {
 						return false;
 				}
 			}
-			public void onDestroyActionMode(ActionMode mode) {
-			// Required, but not used in this implementation
-			}
+			public void onDestroyActionMode(ActionMode mode) {}
 		});
 	}
 	return v;

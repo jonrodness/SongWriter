@@ -54,11 +54,8 @@ public class SongFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState)  {
 		super.onCreate(savedInstanceState);
-		
-		setHasOptionsMenu(true);
-		
+		setHasOptionsMenu(true);		
 		UUID songId = (UUID) getArguments().getSerializable(EXTRA_SONG_ID);
-		
 		mSong = SongLab.get(getActivity()).getSongs(songId);
 	}
 	
@@ -88,7 +85,8 @@ public class SongFragment extends Fragment {
 		}
 	}
 	
-	@Override // I DONT THINK THIS WILL BE NEEDED AFTER DATE BUTTON REMOVED
+	// Only used for DatePicker
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
 		if (resultCode != Activity.RESULT_OK) return;
@@ -137,15 +135,7 @@ public class SongFragment extends Fragment {
 				
 				Intent i = new Intent(getActivity(), NoteListActivity.class);
 				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-				startActivity(i);
-				
-//				FragmentManager fm = getActivity().getSupportFragmentManager();
-//				
-//				ChooseFragment dialog = ChooseFragment.newInstance(mSong.getDate());
-//				//DatePickerFragment dialog = DatePickerFragment.newInstance(mSong.getDate()); // BEFORE CHALLENGE UPDATE
-//				dialog.setTargetFragment(SongFragment.this, REQUEST_DATE);
-//				
-//				dialog.show(fm, DIALOG_DATE);			
+				startActivity(i);			
 			}
 		});
 		

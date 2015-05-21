@@ -43,9 +43,8 @@ public class Song {
 		mId = UUID.fromString(json.getString(JSON_ID));
         mTitle = json.getString(JSON_TITLE);
         mFavourite = json.getBoolean(JSON_FAVOURITE);
-        mDate = new Date(json.getLong(JSON_DATE));
-        
-        mNotes = new ArrayList<Note>();
+        mDate = new Date(json.getLong(JSON_DATE));    
+        mNotes = new ArrayList<Note>();      
         
         if (json.has(JSON_NOTES)) {
         	notes = json.getJSONArray(JSON_NOTES);
@@ -55,8 +54,7 @@ public class Song {
             }
         }
         
-        
-        mRecordings = new ArrayList<Recording>();
+        mRecordings = new ArrayList<Recording>();      
         
         if (json.has(JSON_RECORDINGS)){
 	        recordings = json.getJSONArray(JSON_RECORDINGS);

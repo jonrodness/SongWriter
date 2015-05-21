@@ -45,9 +45,7 @@ public class TimePickerFragment extends DialogFragment {
 		calendar.setTime(mDate);
 		int hour = calendar.get(Calendar.HOUR);
 		int minute = calendar.get(Calendar.MINUTE);
-		
-		//int amPm = calendar.get(Calendar.AM_PM);
-		
+				
 		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_time, null);
 		
 		TimePicker timePicker = (TimePicker)v.findViewById(R.id.dialog_time_timePicker);
@@ -85,7 +83,6 @@ public class TimePickerFragment extends DialogFragment {
 		}).create();
 	} 
 		 
-	
 	public static TimePickerFragment newInstance (Date date) {
 		Bundle args = new Bundle();
 		args.putSerializable(EXTRA_DATE, date);

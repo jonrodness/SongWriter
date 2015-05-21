@@ -18,7 +18,6 @@ public class SongLab {
 		
 	private SongLab(Context appContext) {
 		mAppContext = appContext;
-		//mSongs = new ArrayList<Song>();
 		mSerializer = new SongWriterJSONSerializer(mAppContext, FILENAME);
 		
 		try {

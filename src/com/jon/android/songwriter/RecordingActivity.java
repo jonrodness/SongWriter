@@ -64,9 +64,7 @@ public class RecordingActivity extends Activity {
 		mRecording.setFileName(mFileName);
 		mStartRecording = true;
 		mStartPlaying = true;
-		
-		//setContentView(R.layout.activity_recording);
-		
+				
 		mTitleField = (EditText)findViewById(R.id.recording_title);
 		mTitleField.setText(mRecording.getTitle());
 		mTitleField.addTextChangedListener(new TextWatcher() {

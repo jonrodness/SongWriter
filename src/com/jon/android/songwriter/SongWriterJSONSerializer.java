@@ -39,7 +39,6 @@ public class SongWriterJSONSerializer {
             StringBuilder jsonString = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
-                // Line breaks are omitted and irrelevant
                 jsonString.append(line);
             }
             // Parse the JSON using JSONTokener
