@@ -31,7 +31,9 @@ public class Recording {
 	public Recording(JSONObject json) throws JSONException {
 		mId = UUID.fromString(json.getString(JSON_ID));
 		mDate = new Date(json.getLong(JSON_DATE));
-		mTitle = json.getString(JSON_TITLE);
+		 if (json.has(JSON_TITLE)) {
+				mTitle = json.getString(JSON_TITLE);
+			}
 		mFileName = json.getString(JSON_FNAME);
 		
 		Log.d(TAG, "JSON to Recording successful");		

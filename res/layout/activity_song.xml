@@ -52,7 +52,7 @@
 
         <Button
             android:id="@+id/new_note_button"
-            android:background="@drawable/new_resource_button"
+            android:background="@drawable/resource_new_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_input_add"
@@ -61,13 +61,15 @@
             android:drawableRight="@drawable/ic_menu_paste_holo_light"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:padding="15dp"
             android:text="@string/add_note"
             android:textSize="0px" />
 
         <Button
             android:id="@+id/new_recording_button"
-            android:background="@drawable/new_resource_button"
+            android:background="@drawable/resource_new_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_input_add"
@@ -76,6 +78,8 @@
             android:drawableRight="@drawable/ic_btn_speak_now"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:padding="15dp"
             android:text="@string/add_recording"
             android:textSize="0px" />
@@ -86,7 +90,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp" >
 
         <RadioButton
