@@ -17,13 +17,13 @@
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="subtitle">Record your mind.</string>
-    <string name="delete_song">Delete</string>
+    <string name="delete_song">Delete Song</string>
     <string name="add_song">Add a new song</string>
     <string name="notes">Notes</string>
     <string name="recordings">Recordings</string>
     <string name="notes_title">Note List</string>
-    <string name="add_note">Add a new note</string>
-    <string name="delete_note">Delete</string>
+    <string name="add_note">Add Note</string>
+    <string name="delete_note">Delete Note</string>
     <string name="note_title_label">Title: </string>
     <string name="note_title_hint">Enter a title for the note.</string>
     <string name="note_created_label">Created: &#160;</string>
@@ -35,11 +35,17 @@
     <string name="stop">Stop</string>
     <string name="recordings_title">Recording List</string>
     <string name="untitled_recording">Untitled</string>
-    <string name="delete_recording">Delete</string>
+    <string name="delete_recording">Delete Recording</string>
     <string name="new_recording">New Recording</string>
-    <string name="add_recording">Add a new recording</string>
+    <string name="add_recording">Add Recording</string>
     <string name="recording_title_label">Title: </string>
     <string name="recording_title_hint">Enter a title for the recording.</string>
+    <string name="recordings_radio">Recordings</string>
+    <string name="notes_radio">Notes</string>
+    <string name="add_note_message">No notes added to this song yet.</string>
+    <string name="add_recording_message">No recordings added to this song yet.</string>
+    <string name="play_not_allowed">Cannot playback while recording.</string>
+    <string name="record_not_allowed">Cannot record while playing.</string>
     
     
     

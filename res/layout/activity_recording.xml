@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@android:color/white" >
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,13 +32,23 @@
 	        android:id="@+id/record_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center" />
+	        android:paddingTop="10dp"
+	        android:paddingBottom="10dp"
+	        android:paddingRight="7dp"
+	        android:paddingLeft="7dp"
+	        android:layout_gravity="center"
+	        android:background="@drawable/recording_button" />
 	      <Button 
 	        android:id="@+id/play_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:paddingTop="10dp"
+	        android:paddingBottom="10dp"
+	        android:paddingRight="7dp"
+	        android:paddingLeft="7dp"
 	        android:layout_gravity="center"
-	        android:layout_marginTop="20dp" />
+	        android:layout_marginTop="20dp"
+	        android:background="@drawable/recording_button" />
     </LinearLayout>
     
 </RelativeLayout>

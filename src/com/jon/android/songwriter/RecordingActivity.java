@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RecordingActivity extends Activity {
 	
@@ -51,6 +52,8 @@ public class RecordingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recording);
+		
+		setTitle(R.string.new_recording);
 		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -87,16 +90,22 @@ public class RecordingActivity extends Activity {
 		mRecordButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_notification_overlay, 0, 0);
 		mRecordButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				onRecord(mStartRecording);
-				if (mStartRecording) {
-					mRecordButton.setText("Stop Recording");
-					mRecordButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_stop, 0, 0);
+				if (mStartPlaying) {
+					onRecord(mStartRecording);
+					if (mStartRecording) {
+						mRecordButton.setText("Stop Recording");
+						mRecordButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_stop, 0, 0);
+					}
+					else {
+						mRecordButton.setText("Start Recording");
+						mRecordButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_notification_overlay, 0, 0);
+					}
+					mStartRecording = !mStartRecording;
 				}
 				else {
-					mRecordButton.setText("Start Recording");
-					mRecordButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_notification_overlay, 0, 0);
+					Toast toast = Toast.makeText(RecordingActivity.this, R.string.record_not_allowed, Toast.LENGTH_SHORT);
+					toast.show();
 				}
-				mStartRecording = !mStartRecording;
 			}
 		});
 		
@@ -105,18 +114,24 @@ public class RecordingActivity extends Activity {
 		mPlayButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_play, 0, 0);
 		mPlayButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				onPlay(mStartPlaying); 
-				if (mStartPlaying) {
-					mPlayButton.setText("Stop Playing");
-					mPlayButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_stop, 0, 0);
+				if (mStartRecording) {
+					onPlay(mStartPlaying);
+					if (mStartPlaying) {
+						mPlayButton.setText("Stop Playing");
+						mPlayButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_stop, 0, 0);
+					}
+					else {
+						mPlayButton.setText("Start Playing");
+						mPlayButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_play, 0, 0);
+					}
+					mStartPlaying = !mStartPlaying;
 				}
 				else {
-					mPlayButton.setText("Start Playing");
-					mPlayButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_media_play, 0, 0);
+					Toast toast = Toast.makeText(RecordingActivity.this, R.string.play_not_allowed, Toast.LENGTH_SHORT);
+					toast.show();
 				}
-				mStartPlaying = !mStartPlaying;
-				}
-			});
+			}
+		});
 	}
 	
 	@Override

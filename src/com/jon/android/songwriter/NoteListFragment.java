@@ -41,7 +41,7 @@ public class NoteListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		setHasOptionsMenu(true);
+//		setHasOptionsMenu(true);
 		
 		mSongs = SongLab.get(getActivity()).getSongs();
 		
@@ -56,14 +56,14 @@ public class NoteListFragment extends ListFragment {
 		}		
 		mNotes = mSong.getNotes();
 		
-		if (mSong.getTitle() != null) {
-			getActivity().setTitle(mSong.getTitle()
-					+ ": " + getResources().getText(R.string.notes_title));
-		}
-		else {
-			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
-					+ ": " + getResources().getText(R.string.notes_title));
-		}
+//		if (mSong.getTitle() != null) {
+//			getActivity().setTitle(mSong.getTitle()
+//					+ ": " + getResources().getText(R.string.notes_title));
+//		}
+//		else {
+//			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
+//					+ ": " + getResources().getText(R.string.notes_title));
+//		}
 		
 		
 		NoteAdapter adapter = new NoteAdapter(mNotes);
@@ -76,28 +76,28 @@ public class NoteListFragment extends ListFragment {
 		inflater.inflate(R.menu.fragment_note_list, menu);
 	}
 	
-	@TargetApi(11)
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()){
-			case android.R.id.home:
-				if (NavUtils.getParentActivityName(getActivity()) != null) {
-					NavUtils.navigateUpFromSameTask(getActivity());
-				}
-				return true;
-			case R.id.menu_item_new_note:
-				Note n = new Note();
-				n.setDate(new Date());
-				mSong.addNote(n);
-				Intent i = new Intent(getActivity(), NotePagerActivity.class);
-				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-				i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
-				startActivityForResult(i, 0);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
+//	@TargetApi(11)
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()){
+//			case android.R.id.home:
+//				if (NavUtils.getParentActivityName(getActivity()) != null) {
+//					NavUtils.navigateUpFromSameTask(getActivity());
+//				}
+//				return true;
+//			case R.id.menu_item_new_note:
+//				Note n = new Note();
+//				n.setDate(new Date());
+//				mSong.addNote(n);
+//				Intent i = new Intent(getActivity(), NotePagerActivity.class);
+//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
+//				i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
+//				startActivityForResult(i, 0);
+//				return true;
+//			default:
+//				return super.onOptionsItemSelected(item);
+//		}
+//	}
 	
 	@TargetApi(11)
 	@Override
@@ -110,20 +110,20 @@ public class NoteListFragment extends ListFragment {
 		}
 	}
 	
-	mAddNoteButton = (Button)v.findViewById(R.id.add_note_button);
-	mAddNoteButton.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			Note n = new Note();
-			n.setDate(new Date());
-			mSong.addNote(n);
-			Intent i = new Intent(getActivity(), NotePagerActivity.class);
-			i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-			i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
-			startActivity(i);	
-		}
-	});
+//	mAddNoteButton = (Button)v.findViewById(R.id.add_note_button);
+//	mAddNoteButton.setOnClickListener(new View.OnClickListener() {
+//		
+//		@Override
+//		public void onClick(View v) {
+//			Note n = new Note();
+//			n.setDate(new Date());
+//			mSong.addNote(n);
+//			Intent i = new Intent(getActivity(), NotePagerActivity.class);
+//			i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
+//			i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
+//			startActivity(i);	
+//		}
+//	});
 	
 	ListView listView = (ListView) v.findViewById(android.R.id.list);
 	

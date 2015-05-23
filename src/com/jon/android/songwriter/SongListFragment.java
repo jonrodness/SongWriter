@@ -58,7 +58,7 @@ public class SongListFragment extends ListFragment {
 	        case R.id.menu_item_new_song:
 	            Song s = new Song();
 	            SongLab.get(getActivity()).addSong(s);
-	            Intent i = new Intent(getActivity(), SongPagerActivity.class);
+	            Intent i = new Intent(getActivity(), SongActivity.class);
 	            i.putExtra(SongFragment.EXTRA_SONG_ID, s.getId());
 	            startActivityForResult(i, 0);
 	            return true;
@@ -100,7 +100,7 @@ public class SongListFragment extends ListFragment {
 			public void onClick(View v) {
 				Song s = new Song();
 	            SongLab.get(getActivity()).addSong(s);
-	            Intent i = new Intent(getActivity(), SongPagerActivity.class);
+	            Intent i = new Intent(getActivity(), SongActivity.class);
 	            i.putExtra(SongFragment.EXTRA_SONG_ID, s.getId());
 	            startActivity(i);				
 			}
@@ -155,7 +155,7 @@ public class SongListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Song s = ((SongAdapter)getListAdapter()).getItem(position);
-		Intent i = new Intent(getActivity(), SongPagerActivity.class);
+		Intent i = new Intent(getActivity(), SongActivity.class);
 		i.putExtra(SongFragment.EXTRA_SONG_ID, s.getId());
 		startActivity(i);
 	}

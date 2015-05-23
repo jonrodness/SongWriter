@@ -14,11 +14,11 @@
         android:gravity="center"
         android:text="@string/add_recording" >
         
-        <Button
-            android:id="@+id/add_recording_button"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_recording" />
+            android:gravity="center"
+            android:text="@string/add_recording_message" />
 
     </LinearLayout>	
     

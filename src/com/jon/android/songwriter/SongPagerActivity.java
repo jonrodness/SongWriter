@@ -41,7 +41,7 @@ public class SongPagerActivity extends FragmentActivity {
 					setTitle("Song: " + song.getTitle());
 				}
 				else {
-					setTitle("Song: " + getResources().getString(R.string.untitled_song));
+					setTitle("Song: " + R.string.untitled_song);
 				}
 				return SongFragment.newInstance(song.getId());
 			}
@@ -59,7 +59,7 @@ public class SongPagerActivity extends FragmentActivity {
 					setTitle("Song: " + song.getTitle());
 				}
 				else {
-					setTitle("Song: " + getResources().getString(R.string.untitled_song));
+					setTitle("Song: " + R.string.untitled_song);
 				}
 			}
 		});

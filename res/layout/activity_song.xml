@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/song_title_label" />
+
+        <EditText
+            android:id="@+id/song_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.36"
+            android:ems="10"
+            android:hint="@string/song_title_hint" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/song_created_label" />
+
+        <TextView
+            android:id="@+id/song_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" >
+        
+
+        <Button
+            android:id="@+id/new_note_button"
+            android:background="@drawable/new_resource_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_input_add"
+            android:drawableLeft="@drawable/ic_input_add"
+            android:drawableEnd="@drawable/ic_menu_paste_holo_light"
+            android:drawableRight="@drawable/ic_menu_paste_holo_light"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="15dp"
+            android:text="@string/add_note"
+            android:textSize="0px" />
+
+        <Button
+            android:id="@+id/new_recording_button"
+            android:background="@drawable/new_resource_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_input_add"
+            android:drawableLeft="@drawable/ic_input_add"
+            android:drawableEnd="@drawable/ic_btn_speak_now"
+            android:drawableRight="@drawable/ic_btn_speak_now"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="15dp"
+            android:text="@string/add_recording"
+            android:textSize="0px" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" >
+
+        <RadioButton
+            android:id="@+id/radio_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/notes_radio" />
+
+        <RadioButton
+            android:id="@+id/radio_recordings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/recordings_radio" />
+    </RadioGroup>
+    
+    <FrameLayout
+        android:id="@+id/song_frame"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/frame_layout_background" > 
+    </FrameLayout>
+
+
+</LinearLayout>

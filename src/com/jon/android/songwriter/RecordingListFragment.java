@@ -47,8 +47,8 @@ public class RecordingListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		setHasOptionsMenu(true);
-		getActivity().setTitle(R.string.recordings_title);
+		//setHasOptionsMenu(true);
+		//getActivity().setTitle(R.string.recordings_title);
 		
 		mStartPlaying = true;
 		
@@ -56,14 +56,14 @@ public class RecordingListFragment extends ListFragment {
 		mSong = SongLab.get(getActivity()).getSongs(songId);
 		mRecordings = mSong.getRecordings();
 		
-		if (mSong.getTitle() != null) {
-			getActivity().setTitle(mSong.getTitle()
-					+ ": " + getResources().getText(R.string.recordings_title));
-		}
-		else {
-			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
-					+ ": " + getResources().getText(R.string.recordings_title));
-		}
+//		if (mSong.getTitle() != null) {
+//			getActivity().setTitle(mSong.getTitle()
+//					+ ": " + getResources().getText(R.string.recordings_title));
+//		}
+//		else {
+//			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
+//					+ ": " + getResources().getText(R.string.recordings_title));
+//		}
 				
 		RecordingAdapter adapter = new RecordingAdapter(mRecordings);
 		setListAdapter(adapter);
@@ -75,28 +75,28 @@ public class RecordingListFragment extends ListFragment {
 		inflater.inflate(R.menu.fragment_recording_list, menu);
 	}
 	
-	@TargetApi(11)
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()){
-		case android.R.id.home:
-			if (NavUtils.getParentActivityName(getActivity()) != null) {
-				NavUtils.navigateUpFromSameTask(getActivity());
-			}
-			return true;
-			case R.id.menu_item_new_recording:
-				Recording r = new Recording();
-				r.setDate(new Date());
-				mSong.addRecording(r);
-				Intent i = new Intent(getActivity(), RecordingActivity.class);
-				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-				startActivityForResult(i, 0);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
+//	@TargetApi(11)
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()){
+//		case android.R.id.home:
+//			if (NavUtils.getParentActivityName(getActivity()) != null) {
+//				NavUtils.navigateUpFromSameTask(getActivity());
+//			}
+//			return true;
+//			case R.id.menu_item_new_recording:
+//				Recording r = new Recording();
+//				r.setDate(new Date());
+//				mSong.addRecording(r);
+//				Intent i = new Intent(getActivity(), RecordingActivity.class);
+//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
+//				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
+//				startActivityForResult(i, 0);
+//				return true;
+//			default:
+//				return super.onOptionsItemSelected(item);
+//		}
+//	}
 	
 	@TargetApi(11)
 	@Override
@@ -109,20 +109,20 @@ public class RecordingListFragment extends ListFragment {
 			}
 		}
 		
-		mAddRecordingButton = (Button)v.findViewById(R.id.add_recording_button);
-		mAddRecordingButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Recording r = new Recording();
-				r.setDate(new Date());
-				mSong.addRecording(r);
-				Intent i = new Intent(getActivity(), RecordingActivity.class);
-				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-				startActivity(i);		
-			}
-		});
+//		mAddRecordingButton = (Button)v.findViewById(R.id.add_recording_button);
+//		mAddRecordingButton.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Recording r = new Recording();
+//				r.setDate(new Date());
+//				mSong.addRecording(r);
+//				Intent i = new Intent(getActivity(), RecordingActivity.class);
+//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
+//				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
+//				startActivity(i);		
+//			}
+//		});
 				
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
 		
@@ -192,7 +192,6 @@ public class RecordingListFragment extends ListFragment {
 			dateTextView.setText(android.text.format.DateFormat.format("MMM dd, yyyy hh:mma", r.getDate()));
 			mPlayStatus = (ImageView)convertView.findViewById(R.id.recording_list_item_play_status);
 			mPlayStatus.setImageResource(R.drawable.ic_media_play);
-			//mPlayStatus.setText("Play");
 
 			return convertView;		
 		}	
@@ -205,6 +204,7 @@ public class RecordingListFragment extends ListFragment {
 		
 		onPlay(mStartPlaying, fName); 
 		if (mStartPlaying) {
+			mPlayStatus = (ImageView) v.findViewById(R.id.recording_list_item_play_status);
 			mPlayStatus.setImageResource(R.drawable.ic_media_stop);
 		}
 		else {
