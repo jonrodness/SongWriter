@@ -43,7 +43,6 @@ public class SongActivity extends FragmentActivity {
 	private RadioButton mRecordingsRadio;
 	private RadioButton mNotesRadio;
 	private FrameLayout mFrameLayout;
-	private static final String DIALOG_DATE = "date";
 	private static final int REQUEST_DATE = 0;
 	
 	private void updateDate() {
@@ -55,22 +54,15 @@ public class SongActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState)  {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_song); //implement
+		setContentView(R.layout.activity_song);
 		
-		ActionBar actionBar = getActionBar(); //added
-		actionBar.setDisplayHomeAsUpEnabled(true); //added
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		//setHasOptionsMenu(true);		
-		final UUID songId = (UUID) getIntent().getSerializableExtra(EXTRA_SONG_ID); //changed
-		mSong = SongLab.get(this).getSongs(songId); // changed
+		final UUID songId = (UUID) getIntent().getSerializableExtra(EXTRA_SONG_ID);
+		mSong = SongLab.get(this).getSongs(songId);
 		
-		if (mSong.getTitle() != null) {
-			setTitle(mSong.getTitle());
-		}
-		else {
-			setTitle(R.string.untitled_song);
-		}
-		
+		setTitle(R.string.songs_title);
 		
 		mTitleField = (EditText) findViewById(R.id.song_title);
 		mTitleField.setText(mSong.getTitle());
@@ -87,12 +79,10 @@ public class SongActivity extends FragmentActivity {
 		
 		mDateText = (TextView) findViewById(R.id.song_date);
 		updateDate();
-		
-		
+				
 		mNotesButton = (Button) findViewById(R.id.new_note_button);
 		mNotesButton.setOnClickListener(new View.OnClickListener() {
 		
-		// THIS MUST CHANGE WHEN TOGGLE IS ADDED
 			@Override
 			public void onClick(View v) {
 				
@@ -102,12 +92,7 @@ public class SongActivity extends FragmentActivity {
 				Intent i = new Intent(SongActivity.this, NotePagerActivity.class);
 				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
 				i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
-				startActivity(i);
-				
-				
-//				Intent i = new Intent(SongActivity.this, NoteListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);			
+				startActivity(i);			
 			}
 		});
 		
@@ -125,12 +110,7 @@ public class SongActivity extends FragmentActivity {
 				Intent i = new Intent(SongActivity.this, RecordingActivity.class);
 				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
 				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-				startActivity(i);
-				
-				
-//				Intent i = new Intent(SongActivity.this, RecordingListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);				
+				startActivity(i);				
 			}
 		});
 		
@@ -143,11 +123,7 @@ public class SongActivity extends FragmentActivity {
 				FragmentManager fm = getSupportFragmentManager();
 				FragmentTransaction transaction = fm.beginTransaction();
 				transaction.replace(SongActivity.this.findViewById(R.id.song_frame).getId(), recFragment);
-				transaction.commit();
-				
-//				Intent i = new Intent(getActivity(), RecordingListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);				
+				transaction.commit();			
 			}
 		});
 		
@@ -160,11 +136,7 @@ public class SongActivity extends FragmentActivity {
 				FragmentManager fm = getSupportFragmentManager();
 				FragmentTransaction transaction = fm.beginTransaction();
 				transaction.replace(SongActivity.this.findViewById(R.id.song_frame).getId(), noteFragment);
-				transaction.commit();
-				
-//				Intent i = new Intent(getActivity(), RecordingListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);				
+				transaction.commit();		
 			}
 		});
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
@@ -173,11 +145,10 @@ public class SongActivity extends FragmentActivity {
 		}
 	}
 	
-	// changed
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.activity_song, menu); //implement
+		inflater.inflate(R.menu.activity_song, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -214,67 +185,12 @@ public class SongActivity extends FragmentActivity {
 		}
 	}
 	
-//	@TargetApi(11)
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
-//			Bundle savedInstanceState) {
-//		View v = inflater.inflate(R.layout.fragment_song, parent, false);
-//		
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//			if (NavUtils.getParentActivityName(getActivity()) != null) {
-//				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-//			}
-//		}
-//		
-//		mTitleField = (EditText) v.findViewById(R.id.song_title);
-//		mTitleField.setText(mSong.getTitle());
-//		mTitleField.addTextChangedListener(new TextWatcher() {
-//			
-//			public void onTextChanged(CharSequence c, int start, int before, int count) {
-//				mSong.setTitle(c.toString());
-//			}
-//			
-//			public void beforeTextChanged(CharSequence c, int start, int count, int after) {}
-//			
-//			public void afterTextChanged(Editable c) {}
-//		});
-//		
-//		mDateText = (TextView) v.findViewById(R.id.song_date);
-//		updateDate();
-//		
-//		
-//		mNotesButton = (Button) v.findViewById(R.id.new_note_button);
-//		mNotesButton.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				
-//				Intent i = new Intent(getActivity(), NoteListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);			
-//			}
-//		});
-//		
-//		mRecordingsButton = (Button) v.findViewById(R.id.new_recording_button);
-//		mRecordingsButton.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(getActivity(), RecordingListActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				startActivity(i);				
-//			}
-//		});
-//		return v;
-//	}
-	
 	@Override
 	public void onPause() {
 		super.onPause();
 		SongLab.get(this).saveSongs();
 	}
 	
-	// I think this is uneccesary
 	public static SongFragment newInstance(UUID songId) {
 		Bundle args = new Bundle();
 		args.putSerializable(EXTRA_SONG_ID, songId);

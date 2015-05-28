@@ -1,6 +1,7 @@
 package com.jon.android.songwriter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.jon.android.songwriter.R;
 
@@ -145,7 +146,6 @@ public class SongListFragment extends ListFragment {
 							return false;
 					}
 				}
-				
 				public void onDestroyActionMode(ActionMode mode) {}
 			});
 		}				
@@ -191,7 +191,4 @@ public class SongListFragment extends ListFragment {
 		super.onResume();
 		((SongAdapter)getListAdapter()).notifyDataSetChanged();
 	}
-	
-
-
 }

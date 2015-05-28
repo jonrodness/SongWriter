@@ -30,7 +30,7 @@ public class NotePagerActivity extends FragmentActivity {
 		UUID songId = (UUID)getIntent().getSerializableExtra(SongFragment.EXTRA_SONG_ID);
 		mSongs = SongLab.get(this).getSongs();
 		
-		for (int i = 0; i < mSongs.size(); i++) {				// encapsulate
+		for (int i = 0; i < mSongs.size(); i++) {
 			if (mSongs.get(i).getId().equals(songId)) {
 				mSong = mSongs.get(i);
 				break;
@@ -46,15 +46,9 @@ public class NotePagerActivity extends FragmentActivity {
 			@Override
 			public Fragment getItem(int pos) {
 				Note note = mNotes.get(pos);
-				if(note.getTitle() != null) {
-					setTitle("Note: " + note.getTitle());
-				}
-				else {
-					setTitle("Note: " + getResources().getString(R.string.untitled_note));
-				}
+				setTitle(R.string.notes_title);
 				return NoteFragment.newInstance(mSong.getId(), note.getId());
 			}
-
 			@Override
 			public int getCount() {
 				return mNotes.size();
@@ -66,12 +60,6 @@ public class NotePagerActivity extends FragmentActivity {
 			@Override
 			public void onPageSelected(int pos) {
 				Note note = mNotes.get(pos);
-				if(note.getTitle() != null) {
-					setTitle("Note: " + note.getTitle());
-				}
-				else {
-					setTitle("Note: " + getResources().getString(R.string.untitled_note));
-				}
 			}
 			
 			@Override
@@ -83,7 +71,7 @@ public class NotePagerActivity extends FragmentActivity {
 		
 		UUID noteId = (UUID)getIntent().getSerializableExtra(NoteFragment.EXTRA_NOTE_ID);
 		for (int i = 0; i < mNotes.size(); i++) {
-			if (mNotes.get(i).getId().equals(noteId)) {	// encapsulate
+			if (mNotes.get(i).getId().equals(noteId)) {
 				mViewPager.setCurrentItem(i);
 				break;
 			}

@@ -119,8 +119,7 @@ public class NoteFragment extends Fragment {
 					int count) {
 				mNote.setBody(s.toString());
 			}	
-		});
-		
+		});	
 		return v;
 	}
 	
@@ -139,5 +138,4 @@ public class NoteFragment extends Fragment {
 		super.onPause();
 		SongLab.get(getActivity()).saveSongs();
 	}
-
 }

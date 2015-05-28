@@ -92,5 +92,4 @@ public class TimePickerFragment extends DialogFragment {
 		
 		return fragment;
 	}
-
 }

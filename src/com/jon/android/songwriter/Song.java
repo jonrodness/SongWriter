@@ -21,7 +21,6 @@ public class Song {
     private static final String JSON_NOTES = "notes";
     private static final String JSON_RECORDINGS = "recordings";
 
-	
 	private UUID mId;
 	private String mTitle;
 	private Date mDate;
@@ -86,12 +85,11 @@ public class Song {
         	recordings.put(rec.toJSON());
         	json.put(JSON_RECORDINGS, recordings);
         }
-        
         return json;
     }
 	
 	public void addRecording(Recording recording) {
-		mRecordings.add(recording);
+		mRecordings.add(0, recording);
 	}
 	
 	public void deleteRecording (Recording recording) {
@@ -115,7 +113,7 @@ public class Song {
 	}
 	
 	public void addNote(Note note) {
-		mNotes.add(note);
+		mNotes.add(0, note);
 	}
 	
 	public void deleteNote (Note note) {

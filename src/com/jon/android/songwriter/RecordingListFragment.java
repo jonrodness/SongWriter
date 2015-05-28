@@ -2,6 +2,7 @@ package com.jon.android.songwriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
@@ -38,7 +39,6 @@ public class RecordingListFragment extends ListFragment {
 	private static final String TAG = "RecordingListFragment";
 	private Song mSong;
 	private ImageView mPlayStatus;
-	private Button mAddRecordingButton;
 	private ArrayList<Recording> mRecordings;
 	private boolean mStartPlaying;
 	private MediaPlayer mPlayer;
@@ -47,24 +47,13 @@ public class RecordingListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		//setHasOptionsMenu(true);
-		//getActivity().setTitle(R.string.recordings_title);
 		
 		mStartPlaying = true;
 		
 		UUID songId = (UUID) getArguments().getSerializable(SongFragment.EXTRA_SONG_ID);
 		mSong = SongLab.get(getActivity()).getSongs(songId);
 		mRecordings = mSong.getRecordings();
-		
-//		if (mSong.getTitle() != null) {
-//			getActivity().setTitle(mSong.getTitle()
-//					+ ": " + getResources().getText(R.string.recordings_title));
-//		}
-//		else {
-//			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
-//					+ ": " + getResources().getText(R.string.recordings_title));
-//		}
-				
+			
 		RecordingAdapter adapter = new RecordingAdapter(mRecordings);
 		setListAdapter(adapter);
 	}
@@ -74,29 +63,6 @@ public class RecordingListFragment extends ListFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.fragment_recording_list, menu);
 	}
-	
-//	@TargetApi(11)
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()){
-//		case android.R.id.home:
-//			if (NavUtils.getParentActivityName(getActivity()) != null) {
-//				NavUtils.navigateUpFromSameTask(getActivity());
-//			}
-//			return true;
-//			case R.id.menu_item_new_recording:
-//				Recording r = new Recording();
-//				r.setDate(new Date());
-//				mSong.addRecording(r);
-//				Intent i = new Intent(getActivity(), RecordingActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-//				startActivityForResult(i, 0);
-//				return true;
-//			default:
-//				return super.onOptionsItemSelected(item);
-//		}
-//	}
 	
 	@TargetApi(11)
 	@Override
@@ -108,21 +74,6 @@ public class RecordingListFragment extends ListFragment {
 				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 			}
 		}
-		
-//		mAddRecordingButton = (Button)v.findViewById(R.id.add_recording_button);
-//		mAddRecordingButton.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Recording r = new Recording();
-//				r.setDate(new Date());
-//				mSong.addRecording(r);
-//				Intent i = new Intent(getActivity(), RecordingActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				i.putExtra(RecordingActivity.EXTRA_RECORDING_ID, r.getId());
-//				startActivity(i);		
-//			}
-//		});
 				
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
 		

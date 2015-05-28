@@ -90,14 +90,11 @@ public class ChooseFragment extends DialogFragment {
 		.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// Cancel
-			}
+			public void onClick(DialogInterface dialog, int which) {}
 		}).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				sendResult(Activity.RESULT_OK);
 			}
 		}).create();

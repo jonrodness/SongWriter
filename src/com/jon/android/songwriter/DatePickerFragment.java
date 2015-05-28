@@ -33,8 +33,6 @@ public class DatePickerFragment extends DialogFragment {
 		getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
 	}
 	
-	
-	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		mDate = (Date)getArguments().getSerializable(EXTRA_DATE);
@@ -71,7 +69,6 @@ public class DatePickerFragment extends DialogFragment {
 		}).create();
 	} 
 		
-	
 	public static DatePickerFragment newInstance (Date date) {
 		Bundle args = new Bundle();
 		args.putSerializable(EXTRA_DATE, date);

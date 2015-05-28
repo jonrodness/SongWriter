@@ -7,7 +7,7 @@
     <string name="song_title_hint">Enter a title for the song.</string>
     <string name="song_title_label">Title: </string>
     <string name="song_created_label">Created: &#160;</string>
-    <string name="songs_title">Song List</string>
+    <string name="songs_title">Songs</string>
     <string name="untitled_song">Untitled</string>
     <string name="date_picker_title">Date of crime</string>
     <string name="date_button">Date</string>
@@ -21,7 +21,7 @@
     <string name="add_song">Add a new song</string>
     <string name="notes">Notes</string>
     <string name="recordings">Recordings</string>
-    <string name="notes_title">Note List</string>
+    <string name="notes_title">Notes</string>
     <string name="add_note">Add Note</string>
     <string name="delete_note">Delete Note</string>
     <string name="note_title_label">Title: </string>

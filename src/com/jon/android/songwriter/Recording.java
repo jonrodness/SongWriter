@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Environment;
 import android.util.Log;
 
 public class Recording {
@@ -26,6 +27,7 @@ public class Recording {
 	public Recording() {
 		mId = UUID.randomUUID();
 		mDate = new Date();
+		mFileName = createFilename(); 
 	}
 	
 	public Recording(JSONObject json) throws JSONException {
@@ -35,8 +37,18 @@ public class Recording {
 				mTitle = json.getString(JSON_TITLE);
 			}
 		mFileName = json.getString(JSON_FNAME);
-		
 		Log.d(TAG, "JSON to Recording successful");		
+	}
+	
+	private String createFilename() {
+		String fName;
+		int hashId = mId.hashCode();
+		if (hashId < 0) {
+			hashId *= -1;
+		}
+		fName = Environment.getExternalStorageDirectory().getAbsolutePath();
+		fName += "/" + hashId + ".3gp";
+		return fName;
 	}
 	
 	public String getFileName() {
@@ -69,7 +81,7 @@ public class Recording {
 
 	public JSONObject toJSON() throws JSONException {
 		JSONObject json = new JSONObject();
-		if (json.has(JSON_TITLE)) {
+		if (mTitle != null) {
 			json.put(JSON_TITLE, mTitle);
 		}
 		json.put(JSON_FNAME, mFileName);

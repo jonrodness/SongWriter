@@ -79,5 +79,4 @@ public class SongWriterJSONSerializer {
                 writer.close();
         }
     }
-
 }

@@ -1,8 +1,10 @@
 package com.jon.android.songwriter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
+
 
 
 
@@ -35,16 +37,13 @@ public class NoteListFragment extends ListFragment {
 	private Song mSong;
 	private ArrayList<Note> mNotes;
 	private ArrayList<Song> mSongs;
-	private Button mAddNoteButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-//		setHasOptionsMenu(true);
 		
 		mSongs = SongLab.get(getActivity()).getSongs();
-		
 		UUID songId = (UUID) getArguments().getSerializable(SongFragment.EXTRA_SONG_ID);
 		
 		for (int i = 0; i < mSongs.size(); i++){
@@ -56,16 +55,6 @@ public class NoteListFragment extends ListFragment {
 		}		
 		mNotes = mSong.getNotes();
 		
-//		if (mSong.getTitle() != null) {
-//			getActivity().setTitle(mSong.getTitle()
-//					+ ": " + getResources().getText(R.string.notes_title));
-//		}
-//		else {
-//			getActivity().setTitle((String) getResources().getText(R.string.untitled_note)
-//					+ ": " + getResources().getText(R.string.notes_title));
-//		}
-		
-		
 		NoteAdapter adapter = new NoteAdapter(mNotes);
 		setListAdapter(adapter);
 	}
@@ -75,29 +64,6 @@ public class NoteListFragment extends ListFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.fragment_note_list, menu);
 	}
-	
-//	@TargetApi(11)
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()){
-//			case android.R.id.home:
-//				if (NavUtils.getParentActivityName(getActivity()) != null) {
-//					NavUtils.navigateUpFromSameTask(getActivity());
-//				}
-//				return true;
-//			case R.id.menu_item_new_note:
-//				Note n = new Note();
-//				n.setDate(new Date());
-//				mSong.addNote(n);
-//				Intent i = new Intent(getActivity(), NotePagerActivity.class);
-//				i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//				i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
-//				startActivityForResult(i, 0);
-//				return true;
-//			default:
-//				return super.onOptionsItemSelected(item);
-//		}
-//	}
 	
 	@TargetApi(11)
 	@Override
@@ -109,21 +75,6 @@ public class NoteListFragment extends ListFragment {
 			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
-	
-//	mAddNoteButton = (Button)v.findViewById(R.id.add_note_button);
-//	mAddNoteButton.setOnClickListener(new View.OnClickListener() {
-//		
-//		@Override
-//		public void onClick(View v) {
-//			Note n = new Note();
-//			n.setDate(new Date());
-//			mSong.addNote(n);
-//			Intent i = new Intent(getActivity(), NotePagerActivity.class);
-//			i.putExtra(SongFragment.EXTRA_SONG_ID, mSong.getId());
-//			i.putExtra(NoteFragment.EXTRA_NOTE_ID, n.getId());
-//			startActivity(i);	
-//		}
-//	});
 	
 	ListView listView = (ListView) v.findViewById(android.R.id.list);
 	

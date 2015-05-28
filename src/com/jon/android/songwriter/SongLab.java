@@ -41,7 +41,7 @@ public class SongLab {
 	}
 	
 	public void addSong(Song s) {
-		mSongs.add(s);
+		mSongs.add(0, s);
 	}
 	
 	public void deleteSong(Song s) {

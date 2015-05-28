@@ -43,7 +43,6 @@ public class SongFragment extends Fragment {
 	private Button mNotesButton;
 	private Button mRecordingsButton;
 	private TextView mDateText;
-	private static final String DIALOG_DATE = "date";
 	private static final int REQUEST_DATE = 0;
 	
 	private void updateDate() {
@@ -167,5 +166,4 @@ public class SongFragment extends Fragment {
 		
 		return fragment;
 	}
-
 }

@@ -1,6 +1,5 @@
 package com.jon.android.songwriter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -45,7 +44,6 @@ public class RecordingActivity extends Activity {
 	
 	private Recording mRecording;
 	private static String mFileName = null;
-	private UUID recordingId;
 	
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
@@ -62,9 +60,8 @@ public class RecordingActivity extends Activity {
 		mSong = SongLab.get(this).getSongs(songId);
 		UUID recordingId = (UUID) getIntent().getSerializableExtra(EXTRA_RECORDING_ID);
 		mRecording = mSong.getRecording(recordingId);
+		mFileName = mRecording.getFileName();
 		
-		mFileName = createFilename();
-		mRecording.setFileName(mFileName);
 		mStartRecording = true;
 		mStartPlaying = true;
 				
@@ -159,17 +156,6 @@ public class RecordingActivity extends Activity {
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	private String createFilename() { // test
-		String fName;
-		int hashId = mRecording.getId().hashCode();
-		if (hashId < 0) {
-			hashId *= -1;
-		}
-		fName = Environment.getExternalStorageDirectory().getAbsolutePath();
-		fName += "/" + hashId + ".3gp";
-		return fName;
 	}
 
 	private void onRecord(boolean startRecording) {
